@@ -2,6 +2,7 @@
 <html lang="en" ng-app="larabook">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -36,12 +37,20 @@
     <script src="/js/app.js"></script>
     
     <script>
-        $('#flash-overlay-modal').modal();
+        //$('#flash-overlay-modal').modal();
 
         $('.comments__create-form').on('keydown', function(e) {
             if (e.keyCode == 13) {
                 e.preventDefault();
                 $(this).submit();
+            }
+        });
+    </script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )
             }
         });
     </script>

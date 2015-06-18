@@ -12,16 +12,11 @@
                 <div class="media-body">
                     <h1 class="media-heading">{{ $user->username }}</h1>
 
-                    @if($user->present()->followerCount <= 1)
-                        <output>{{ $user->present()->followerCount }} Follower</output>
-                    @else
-                         <output>{{ $user->present()->followerCount }} Followers</output>
-                    @endif
+                    <div>
+                            <h5>Followers</h5>                   
+                            <output>{{ $user->present()->followerCount }}</output>      
+                    </div>
                     
-
-                    @foreach ($user->followers as $follower)
-                        @include ('users.partials.avatar', ['size' => 25, 'user' => $follower])
-                    @endforeach
                 </div>
             </div>
         </div>

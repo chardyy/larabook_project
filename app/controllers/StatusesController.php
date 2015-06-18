@@ -54,10 +54,9 @@ class StatusesController extends \BaseController {
 
         $this->publishStatusForm->validate($input);
 
-        $data = $this->execute(PublishStatusCommand::class, $input);
+        $this->execute(PublishStatusCommand::class, $input);
 
-        $pusher->trigger('larabook', 'StatusWasPublished', $data);
-
+        $pusher->trigger('larabook', 'StatusWasPublished', $input);
 
         Flash::message('Your status has been updated!');
 

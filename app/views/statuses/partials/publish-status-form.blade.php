@@ -4,7 +4,7 @@
     {{ Form::open(['route' => 'statuses_path']) }}
         <!-- Status Form Input -->
         <div class="form-group">
-            {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => "What's on your mind?"]) }}
+            {{ Form::textarea('body', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' => "What's on your mind?", 'id' => 'body']) }}
         </div>
 
         <div class="form-group status-post-submit">

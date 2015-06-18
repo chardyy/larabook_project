@@ -1,5 +1,6 @@
-(function()
+(function($)
 {
+
 	var pusher = new Pusher('db44e6f643901a1da9b8');
 
 	var channel = pusher.subscribe('larabook');
@@ -25,11 +26,17 @@
 			this.check = function(message){
 				var template = Handlebars.compile($('#flash-template').html());
 
-				$(template({ message: "A user unfollowed you" })).appendTo('body').fadeIn(300).fadeOut(6000);
-				
+				$(template({ message: "A user unfollowed you" })).appendTo('body').fadeIn(300).fadeOut(6000);				
+			},
+
+			this.remind = function(message){
+				var template = Handlebars.compile($('#flash-template').html());
+
+				$(template({ message: "A user commented on your status" })).appendTo('body').fadeIn(300).fadeOut(6000);				
 			}
 		
 	};
+
 
 	channel.bind('userFollowsYou', function(data){
 		var output = $('output');
@@ -40,9 +47,7 @@
 	});
 
 	channel.bind('StatusWasPublished', function(data){
-		alert('status');
-
-
+		
 		(new App.Notifier).inform(data.title);
 	});
 
@@ -53,5 +58,10 @@
 
 		(new App.Notifier).check(data.title);
 	});
-	
-})();
+
+	channel.bind('UserCommentedOnStatus', function(data){
+		
+		(new App.Notifier).remind(data.title);
+	});
+
+})(jQuery);
